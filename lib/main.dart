@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_gemini/flutter_gemini.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:horecah_assignment/views/create_personal_form.dart';
 
 import 'constant/colors.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: "lib/.env");
+
+  Gemini.init(apiKey: dotenv.env["GOOGLE_API_KEY"].toString());
+
   runApp(const MyApp());
 }
 
